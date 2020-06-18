@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -137,7 +138,7 @@ class Post extends Model
         // // Передаем саму категорию по ее id
         // $this->category()->save($category);
         
-        if($ids == null) {return;}
+        // if($ids == null) {return;}
         // Синхронизация статьи с категориями
         $this->categories()->sync($ids);
 
@@ -146,7 +147,7 @@ class Post extends Model
     // Добавление тегов
     public function addTags($ids)
     {
-        if($ids == null) {return;}
+        // if($ids == null) {return;}
         
         // Синхронизация статьи с тегами
         $this->tags()->sync($ids);
@@ -190,6 +191,12 @@ class Post extends Model
         $this->save();
     }
 
+    // Ограничиваем кол-во символов в превью поста
+    public function limitDesc()
+    {
+         return Str::limit($this->description, 150,'....') ;
+    }    
+
     // Изменение статьи на обычныю или "Рекомендуемую"
     public function changeView($value)
     {
@@ -220,23 +227,23 @@ class Post extends Model
     // Получаем категории, если добавлены к посту
     public function getCategories()
     {
-        if($this->categories != null) 
+        if(!$this->categories->isEmpty()) 
         {
             // Получаем через запятую строковые данные из массива категорий
             return implode(', ', $this->categories->pluck('title')->all());
         }
-        return 'Категория отсутствует';
+        return 'Без категорий';
     }
 
     // Получаем теги, если добавлены к посту
     public function getTags()
     {
-        if($this->tags != null) 
+        if(!$this->tags->isEmpty()) 
         {
             // Получаем через запятую строковые данные из массива тегов
             return implode(', ', $this->tags->pluck('title')->all());
         }
-        return 'Теги отсутствует';
+        return 'Без тегов';
     }
 
     // Получаем дату в нужном формате

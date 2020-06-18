@@ -16,9 +16,9 @@
 						<h2 class="content__post-subtitle">
 							<a class="content__subtitle-link  post__subtitle-link" href="#">{{$post->subtitle}}</a>
 						</h2>
-						<p class="content__post-text post__text">
+						<div class="content__post-text post__text">
                             {!!$post->content!!}
-						</p>
+                        </div>
 						<div class="content__post-info post-info">
 							<span class="content__post-date post-info__date post-info__item">
 								<time class="content__post-datatime">{{$post->getDate()}}</time>
@@ -41,7 +41,7 @@
 							<p class="content__author-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda beatae odio iusto voluptates distinctio expedita, porro cumque voluptate velit fugiat suscipit error rem natus doloremque repellat harum delectus autem tenetur.</p>
 						</div>
 					</div>	
-				</section>
+                </section>                
 				<div class="content__pagination">
 					<ul class="content__pagination-list pagination-list">
                         @if($post->hasPrevious())

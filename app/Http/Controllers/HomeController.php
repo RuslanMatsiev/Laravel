@@ -12,7 +12,7 @@ class HomeController extends Controller
     // Получаем постынее не менее 5 на странице для пагинации
     public function index()
     {
-        $posts = Post::paginate(5);
+        $posts = Post::where('status', Post::IS_ON)->paginate(5);
         // Передаем в вид
         return view('pages.index', ['posts' => $posts]);
     }
@@ -20,7 +20,7 @@ class HomeController extends Controller
     // Получаем слаг поста
     public function show($slug)
     {
-        // Выведем ошибкку, если такого поста не существует    
+        // Выведем ошибку, если такого поста не существует    
     	$post = Post::where('slug', $slug)->firstOrFail();
 
     	return view('pages.show', compact('post'));
@@ -39,6 +39,7 @@ class HomeController extends Controller
     // Берем посты от категории текущей и отдаем их в вид, на странице не более 5 шт
     public function category($slug)
     {
+        
         $category = Category::where('slug', $slug)->firstOrFail();
 
         $posts = $category->posts()->paginate(5);
@@ -46,4 +47,5 @@ class HomeController extends Controller
         return view('pages.list', ['posts'  =>  $posts]);   
     }    
     
+
 }

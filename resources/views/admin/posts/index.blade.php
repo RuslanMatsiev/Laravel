@@ -65,12 +65,9 @@
                             <img src="{{$post->getImage()}}" alt="" width="100">
                         </td>
                         <td>
-                        <!-- <div class="form-group">
-                          <label class="status-post">
-                            <span class="status-text"></span>
-                            <span class="status-int hidden">{{$post->status}}</span>
-                          </label>
-                        </div>                           -->
+                        <div class="form-group">
+                            <span data-status="{{$post->status}}" class="status-int"></span>
+                        </div>                          
                                     </td>
                         <td><a href="{{route('posts.edit', $post->id)}}" class="fa fa-pencil"></a>
                         {{Form::open(['route' => ['posts.destroy', $post->id], 'method'=>'delete'])}}

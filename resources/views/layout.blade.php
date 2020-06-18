@@ -23,10 +23,9 @@
 			    </div> 				
 				<nav class="navigation__categories">
 			        <ul class="navigation__categories-list">
-			            <li class="navigation__categories-item"><a class="navigation__categories-link" href="#">Первая <span class="count">(2)</span></a></li>
-			            <li class="navigation__categories-item"><a class="navigation__categories-link" href="#">Вторая <span class="count">(2)</span></a></li>
-			            <li class="navigation__categories-item"><a class="navigation__categories-link" href="#">Третья <span class="count">(2)</span></a></li>
-
+						@foreach($post->categories as $category)
+							<li class="navigation__categories-item"><a class="navigation__categories-link" href="{{route('category.show', $category->slug)}}">{{$category->title}}<span class="count"> ({{$category->posts()->count()}})</span></a></li>
+						@endforeach
 			        </ul>	        
 		    	</nav> 
 		    	<form class="navigation__search" action="" method="get">

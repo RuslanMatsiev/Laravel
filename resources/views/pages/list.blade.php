@@ -15,9 +15,9 @@
                             <h2 class="content__post-title">
                                 <a class="content__title-link" href="{{route('post.show', $post->slug)}}">{{$post->title}}</a>
                             </h2>
-                            <p class="content__post-text">
-                                {!!$post->description!!}
-                            </p>
+                            <div class="content__post-text">
+                                {!!$post->limitDesc()!!}
+							</div>
                             <div class="content__post-info">
                                 <span class="content__post-date">
                                     <time class="content__post-datatime">{{$post->getDate()}}</time>
@@ -28,7 +28,11 @@
                                 <span class="content__post-likes">Нравится
                                     <span class="content__likes-count">20</span>
                                 </span>
-                                <a class="content__post-category" href="#">{{$post->getCategories()}}</a>
+                                <div class="content__post-category">        
+                                    @foreach($post->categories as $category)
+                                        <a class="content__category-link" href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>	
                     </section>                

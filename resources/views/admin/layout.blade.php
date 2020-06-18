@@ -433,11 +433,15 @@
     $(document).ready(function(){
         var editor = CKEDITOR.replaceAll();
         CKFinder.setupCKEditor(editor);
-        if($('.status-int').text() == 1) {
-          $('.status-text').text('Черновик');
-        } else {
-          $('.status-text').text('Опубликовано');
-        }
+
+        $('.status-int').each(function () { 
+          if($(this).attr('data-status') == 1) {
+            $(this).text('Черновик');
+          } else {
+            $(this).text('Опубликовано');
+          }
+        });
+        
     });
 </script> 
 </body>
